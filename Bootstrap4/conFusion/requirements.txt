@@ -1,0 +1,5 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-64
+libcxx=10.0.0=1
+nodejs=10.13.0=h0a44026_0
