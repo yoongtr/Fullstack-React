@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(function(){
     $("#mycarousel").carousel( { interval: 2000 } );
-    $("#carouselButton").click(function(){
+    $("#carouselButton").on('click', function(){
             if ($("#carouselButton").children("span").hasClass('fa-pause')) {
                 $("#mycarousel").carousel('pause');
                 $("#carouselButton").children("span").removeClass('fa-pause');
@@ -14,10 +14,10 @@ $(document).ready(function(){
     });
     // $('[data-toggle="tooltip"]').tooltip();
     // Assignment 4 - Change data-* attributes into js
-    $("#loginInput").click(function(){
+    $("#loginInput").on('click', function(){
         $("#loginModal").modal("toggle");
     });
-    $("#reservationInput").click(function(){
+    $("#reservationInput").on('click', function(){
         $("#reservationModal").modal("toggle");
     });
 
