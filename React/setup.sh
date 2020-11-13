@@ -1,0 +1,1 @@
+docker run --rm -it -v $(pwd)/confusion:/workspace -p 3000:3000 -w /workspace --name react_container node:10.15.3 /bin/bash $(which yarn) start
