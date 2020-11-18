@@ -27,7 +27,7 @@ function RenderDish({dish}) {
         return (
             <div></div>
         );
-    };
+    }
 };
 
 function RenderComments({comments}) {
@@ -63,7 +63,7 @@ function RenderComments({comments}) {
         return (
             <div></div>
         );
-    };
+    }
 };
 
 const DishDetail = (props) => {
