@@ -34,10 +34,10 @@ class CommentForm extends Component {
         this.state = {
             isModalOpen:false,
             rating: '1',
-            fullname: '',
+            author: '',
             comment: '',
             touched: {
-                fullname: false,
+                author: false,
                 comment: false
             }
         };
@@ -55,7 +55,7 @@ class CommentForm extends Component {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         // event.preventDefault();
     }
 
@@ -80,18 +80,18 @@ class CommentForm extends Component {
                             </Col>
                         </Row>
                         <Row className="form-group">
-                            <Label htmlFor="fullname" md={2}>Your Name</Label>
+                            <Label htmlFor="author" md={2}>Your Name</Label>
                             <Col md={10}>
-                                <Control.text model=".fullname"
-                                id="fullname"
-                                name="fullname"
+                                <Control.text model=".author"
+                                id="author"
+                                name="author"
                                 className="form-control"
                                 validators={{
                                     minLength: minLength(3),
                                     maxLength: maxLength(15)
                                 }}></Control.text>
                                 <Errors className="text-danger"
-                                model=".fullname"
+                                model=".author"
                                 show="touched"
                                 messages={{
                                     minLength: 'Must be greater than 2 characters',
@@ -120,7 +120,7 @@ class CommentForm extends Component {
     }
 }
 
-function RenderComments({comments, addComment, dishId}) {
+function RenderComments({comments, postComment, dishId}) {
     if (comments!=null) {
         const commentList = comments.map((comment) => {
             return (
@@ -146,7 +146,7 @@ function RenderComments({comments, addComment, dishId}) {
                 <ul className="list-unstyled">
                     {commentList}
                 </ul>
-                <CommentForm dishId={dishId} addComment={addComment} />
+                <CommentForm dishId={dishId} postComment={postComment} />
             </div>
         );
     }
@@ -196,7 +196,7 @@ const DishDetail = (props) => {
                 </div>
                 <div className="col-12 col-md-5 m-1">
                     <RenderComments comments={props.comments}
-                        addComment={props.addComment}
+                        postComment={props.postComment}
                         dishId={props.dish.id}
                     />
                 </div>
