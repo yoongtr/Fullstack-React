@@ -4,13 +4,6 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm } from 'react-redux-form';
     
-    // componentDidMount() {
-    //     console.log('DishDetail component componentDidMount invoked')
-    // };
-
-    // componentDidUpdate() {
-    //     console.log('DishDetail component componentDidUpdate invoked')
-    // };
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
