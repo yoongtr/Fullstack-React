@@ -1,6 +1,8 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, 
+    Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, Errors, LocalForm } from 'react-redux-form';
     
     // componentDidMount() {
     //     console.log('DishDetail component componentDidMount invoked')
@@ -9,11 +11,12 @@ import { Link } from 'react-router-dom';
     // componentDidUpdate() {
     //     console.log('DishDetail component componentDidUpdate invoked')
     // };
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
 
 function RenderDish({dish}) {
     if (dish!=null) {
         return(
-            <div className="col-12 col-md-5 m-1">
                 <Card>
                     <CardImg width="100%" src={dish.image} alt={dish.name} />
                     <CardBody>
@@ -21,7 +24,6 @@ function RenderDish({dish}) {
                         <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
-            </div>
         );   
     }
     else {
@@ -30,6 +32,114 @@ function RenderDish({dish}) {
         );
     }
 };
+
+class CommentForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalOpen:false,
+            rating: '1',
+            fullname: '',
+            comment: '',
+            touched: {
+                fullname: false,
+                comment: false
+            }
+        };
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+    }
+
+    handleSubmit(values) {
+        console.log('Current State is: ' + JSON.stringify(values));
+        alert('Current State is: ' + JSON.stringify(values));
+        // event.preventDefault();
+    }
+
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+            <Button outline onClick={this.toggleModal}><span className="fa fa-pencil fa-lg">Submit Comment</span> </Button>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                <ModalBody>
+                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <Row className="form-group">
+                            <Label htmlFor="rating" md={2}>Rating</Label>
+                            <Col md={10}>
+                                <Control.select model=".rating" name="rating" id="rating" className="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </Control.select>
+                            </Col>
+                        </Row>
+                        <Row className="form-group">
+                            <Label htmlFor="fullname" md={2}>Your Name</Label>
+                            <Col md={10}>
+                                <Control.text model=".fullname"
+                                id="fullname"
+                                name="fullname"
+                                className="form-control"
+                                validators={{
+                                    minLength: minLength(3),
+                                    maxLength: maxLength(15)
+                                }}></Control.text>
+                                <Errors className="text-danger"
+                                model=".fullname"
+                                show="touched"
+                                messages={{
+                                    minLength: 'Must be greater than 2 characters',
+                                    maxLength: 'Must be 15 characters or less'
+                                }}></Errors>
+                            </Col>
+                        </Row>
+                        <Row className="form-group">
+                            <Label htmlFor="comment" md={2}>Comment</Label>
+                            <Col md={10}>
+                                <Control.textarea model=".comment" id="comment" name="comment"
+                                rows="6"
+                                className="form-control"></Control.textarea>
+                            </Col>
+                        </Row>
+                        <Row className="form-group">
+                            <Col md={{size:10, offset: 2}}>
+                                <Button type="submit" color="primary">Submit</Button>
+                            </Col>
+                        </Row>
+                    </LocalForm>
+                </ModalBody>
+            </Modal>
+            </div>
+        )
+    }
+}
 
 function RenderComments({comments}) {
     if (comments!=null) {
@@ -52,11 +162,12 @@ function RenderComments({comments}) {
             )
         });
         return (
-            <div className="col-12 col-md-5 m-1">
+            <div>
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
                     {commentList}
                 </ul>
+                <CommentForm />
             </div>
         );
     }
@@ -68,11 +179,7 @@ function RenderComments({comments}) {
 };
 
 const DishDetail = (props) => {
-    // console.log('DishDetail component render invoked')
 
-    // const dish = this.props.dish;
-    
-    // console.log(this.props);
     if (props.dish!=null) {
         return (
             <div className="container">
