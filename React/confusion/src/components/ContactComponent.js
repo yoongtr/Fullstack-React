@@ -56,7 +56,6 @@ class Contact extends Component {
             values.message,
             values.id
         );
-        alert('Thank you for your feedback! ' + this.props.fetchFeedback());
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }
