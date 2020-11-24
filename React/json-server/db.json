@@ -201,6 +201,14 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 0,
+      "rating": "5",
+      "author": "Yoong",
+      "comment": "Test comment.",
+      "date": "2020-11-24T06:37:21.310Z",
+      "id": 20
     }
   ],
   "promotions": [
@@ -263,6 +271,65 @@
       "message": "afadsfds",
       "date": "2017-12-04T09:41:49.890Z",
       "id": 1
+    },
+    {
+      "date": "2020-11-24T06:05:13.422Z",
+      "id": 2
+    },
+    {
+      "firstname": "test1",
+      "lastname": "test1",
+      "telnum": "12345678",
+      "email": "test1@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "test1",
+      "date": "2020-11-24T06:08:58.765Z",
+      "id": 3
+    },
+    {
+      "firstname": "test2",
+      "lastname": "test2",
+      "telnum": "12345678",
+      "email": "test2@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "test2",
+      "date": "2020-11-24T06:09:51.073Z",
+      "id": 4
+    },
+    {
+      "firstname": "test1",
+      "lastname": "test1",
+      "telnum": "12345678",
+      "email": "test1@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "test1",
+      "date": "2020-11-24T06:27:51.044Z",
+      "id": 5
+    },
+    {
+      "firstname": "test1",
+      "lastname": "test1",
+      "telnum": "12345678",
+      "email": "test1@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "test1",
+      "date": "2020-11-24T06:34:09.200Z",
+      "id": 6
+    },
+    {
+      "firstname": "test1",
+      "lastname": "test1",
+      "telnum": "12345678",
+      "email": "test1@gmail.com",
+      "agree": false,
+      "contactType": "Tel.",
+      "message": "test1",
+      "date": "2020-11-24T06:36:58.995Z",
+      "id": 7
     }
   ]
 }

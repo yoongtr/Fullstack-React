@@ -1,29 +1,53 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderLeader({leaders}) {
-    const leaderList = leaders.map((leader) => {
+    if (leaders.isLoading) {
         return (
-            <Media key={leader.id}>
-                <Media left>
-                    <Media object src={leader.image} alt={leader.name} />
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (leaders.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <h4>{leaders.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else {
+        const leaderList = leaders.leaders.map((leader) => {
+            return (
+                <Media key={leader.id}>
+                    <Media left>
+                        <Media object src={baseUrl + leader.image} alt={leader.name} />
+                    </Media>
+                    <Media body className="ml-4">
+                        <Media heading>{leader.name}</Media>
+                        <p>{leader.designation}</p>
+                        <p>{leader.description}</p>
+                    </Media>
                 </Media>
-                <Media body className="ml-4">
-                    <Media heading>{leader.name}</Media>
-                    <p>{leader.designation}</p>
-                    <p>{leader.description}</p>
-                </Media>
-            </Media>
-        )
+            )
         });
-    return (
-        <Media list>{leaderList}</Media>
-    )
-};    
+        return (
+            <Media list>{leaderList}</Media>
+        )
+    }
+} 
 
 function About(props) {
-
+    console.log(props.leaders);
     return(
         <div className="container">
             <div className="row">
